@@ -100,5 +100,4 @@ export const App = ({getGames}: any) => {
   );
 }
 
-// export default App;
-export default connect(null, {getGames})(App);
+export default connect(null, { getGames })(App);

@@ -1,18 +1,38 @@
-import { takeEvery, put } from 'redux-saga/effects';
-import { games } from '../../games.json';
-import { GET_GAMES, setGames} from '../actions/games';
+import { takeEvery, call, put } from 'redux-saga/effects';
+import { getGamesFromServer } from '../../api/api';
+import { GET_GAMES, setGamesList } from '../actions/games';
+
+// export function* getGamesSaga(action) {
+//   const data = yield call(getGamesFromServer);
+//   console.log(data)
+
+//   if (data.hasOwnProperty('addresses')) {
+//     const gamesList = data.addresses.reduce((prev, item) => {
+//       prev.push({value: item, label: item});
+
+//       return prev;
+//     }, []);
+
+//     yield put(setGamesList(gamesList));
+//   }
+// }
+
+// export function* gamesSaga() {
+//   yield takeEvery(GET_GAMES, getGamesSaga);
+// }
 
 export function* getGamesSaga(action) {
-  const data = games; // Here would be a call to an API in a real app with a backend
+  const data = yield call(getGamesFromServer);
+  console.log(data)
 
-  if (data.hasOwnProperty('games')) {
-    const gamesList = data.games.reduce((prev, item) => {
+  if (data) {
+    const gamesList = data.reduce((prev, item) => {
       prev.push({value: item, label: item});
 
       return prev;
     }, []);
 
-    yield put(setGames(gamesList));
+    yield put(setGamesList(gamesList));
   }
 }
 

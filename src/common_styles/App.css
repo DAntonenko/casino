@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* When there will be time it will be possible to figure out the plugin "PostCSS Custom Media"
+for using css custom properties (variables) in media-queries  */
+@media screen and (max-width: 600px) {
+  main {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height: 600px) {
+  .grid-container {
+    grid-auto-flow: column;
+    overflow: scroll;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media screen and (min-width: 601px) and (min-height: 601px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    overflow: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media screen and (min-width: 900px) and (min-height: 601px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+    overflow: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (min-height: 601px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+    overflow: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

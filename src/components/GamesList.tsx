@@ -1,19 +1,32 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { ReactSortable } from 'react-sortablejs';
-import { games } from '../games.json';
+import ListItem from '@mui/material/ListItem';
+import Checkbox from '@mui/material/Checkbox';
+
+interface IGamesListProps {
+  games: any;
+}
 
 interface ItemType {
   id: number;
   name: string;
 }
 
-const GamesList: FC = (props) => {
+const GamesList = ({games}: any) => {
   const [state, setState] = useState<ItemType[]>(games);
 
   return (
     <ReactSortable list={state} setList={setState} tag='ul'>
       {state.map((item) => (
-        <li key={item.id}>{item.name}</li>
+        <ListItem key={item.id}>
+          {item.name}
+          <Checkbox
+            edge="end"
+            // onChange={handleToggle(value)}
+            // checked={checked.indexOf(value) !== -1}
+            // inputProps={{ 'aria-labelledby': labelId }}
+          />
+        </ListItem>
       ))}
     </ReactSortable>
   );

@@ -8,39 +8,3 @@ for using css custom properties (variables) in media-queries  */
     justify-content: center;
   }
 }
-
-@media screen and (orientation: landscape) and (max-height: 600px) {
-  .grid-container {
-    grid-auto-flow: column;
-    overflow: scroll;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-
-@media screen and (min-width: 601px) and (min-height: 601px) {
-  .grid-container {
-    grid-template-columns: repeat(2, 1fr);
-    overflow: auto;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-
-@media screen and (min-width: 900px) and (min-height: 601px) {
-  .grid-container {
-    grid-template-columns: repeat(3, 1fr);
-    overflow: auto;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-
-@media screen and (min-width: 1200px) and (min-height: 601px) {
-  .grid-container {
-    grid-template-columns: repeat(4, 1fr);
-    overflow: auto;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}

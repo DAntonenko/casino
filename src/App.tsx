@@ -5,12 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import GameCard from './components/GameCard';
+import GamesGrid from './components/GamesGrid/GamesGrid';
 import GamesList from './components/GamesList';
 import { connect } from 'react-redux';
 import { getGames } from './store/actions/games';
-
-import { games } from './games.json';
 
 import './common_styles/App.css';
 
@@ -47,7 +45,7 @@ function a11yProps(index: number) {
   };
 }
 
-export const App = ({getGames}: any) => {
+export const App = ({getGames, games}: any) => {
 
   const [value, setValue] = React.useState(0);
 
@@ -76,28 +74,24 @@ export const App = ({getGames}: any) => {
       </AppBar>
       <Box sx={{ paddingTop: '80px' }} component='main'>
         <TabPanel value={value} index={0}>
-          <Box
-            display='grid'
-            gap={2}
-            sx={{ paddingBottom: '16px' }}
-            className='grid-container'
-          >
-            {games.map((game) => (
-              <Box key={game.id}>
-                <GameCard
-                  name={game.name}
-                  info={game.info}
-                />
-              </Box>
-            ))}
-          </Box>
+          <GamesGrid
+            games={games}
+          />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <GamesList />
+          <GamesList
+            games={games}
+          />
         </TabPanel>
       </Box>
     </CssBaseline>
   );
 }
 
-export default connect(null, { getGames })(App);
+const mapStateToProps = function (state: any) {
+  return {
+    games: state.games.games,
+  }
+}
+
+export default connect(mapStateToProps, { getGames })(App);

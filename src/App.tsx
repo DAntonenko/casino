@@ -55,7 +55,8 @@ export const App = ({getGames, games}: any) => {
 
   useEffect(() => {
     getGames();
-  });
+    // eslint-disable-next-line
+  }, []); // this way of preventing repeated calls is taken from the official React documentation
 
   return (
     <CssBaseline>
@@ -92,6 +93,6 @@ const mapStateToProps = function (state: any) {
   return {
     games: state.games.games,
   }
-}
+};
 
 export default connect(mapStateToProps, { getGames })(App);

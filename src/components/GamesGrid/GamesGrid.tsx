@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Box from '@mui/material/Box';
 import GameCard from '../../components/GameCard';
 
@@ -13,15 +14,24 @@ const GamesGrid = ({games}: any) => {
       className='grid-container'
     >
       {games.map((game: any) => (
-        <Box key={game.id}>
-          <GameCard
-            name={game.name}
-            info={game.info}
-          />
-        </Box>
+        game.isVisible &&
+          <Box key={game.id}>
+            <GameCard
+              id={game.id}
+              name={game.name}
+              info={game.info}
+            />
+          </Box>
       ))}
     </Box>
   );
 }
 
-export default GamesGrid;
+const mapStateToProps = function (state: any) {
+  console.log('grid')
+  return {
+    games: state.games.games,
+  }
+};
+
+export default connect(mapStateToProps)(GamesGrid);

@@ -4,20 +4,18 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { connect } from 'react-redux';
+import { setGameInvisible } from '../store/actions/games';
 import image from '../assets/table.jpg';
 
 interface IGameCardProps {
+  id: string;
   name: string;
   info?: string;
-  imageName?: string;
+  setGameInvisible: any;
 }
 
-const GameCard: React.FunctionComponent<IGameCardProps> = (props) => {
-  const {
-    name,
-    info,
-    imageName,
-  } = props;
+const GameCard: React.FunctionComponent<IGameCardProps> = ({id, name, info, setGameInvisible}) => {
 
   return (
     <Card sx={{ minWidth: 280, maxWidth: 400 }}>
@@ -38,7 +36,13 @@ const GameCard: React.FunctionComponent<IGameCardProps> = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size='small' color='primary'>
+        <Button
+          size='small'
+          color='primary'
+          onClick={() => {
+            setGameInvisible(id);
+          }}
+        >
           Remove
         </Button>
       </CardActions>
@@ -46,4 +50,11 @@ const GameCard: React.FunctionComponent<IGameCardProps> = (props) => {
   );
 }
 
-export default GameCard;
+const mapStateToProps = function (state: any) {
+  console.log('card')
+  return {
+    games: state.games.games,
+  }
+};
+
+export default connect(mapStateToProps, { setGameInvisible })(GameCard);

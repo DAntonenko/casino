@@ -22,7 +22,7 @@ const GamesGrid = ({games}: any) => {
       sx={{ paddingBottom: '16px' }}
       className='grid-container'
     >
-      <ReactSortable list={state} setList={setState} tag='div' style={{display: 'contents'}}>
+      {/* <ReactSortable list={state} setList={setState} tag='div' style={{display: 'contents'}}> */}
         {games.map((game: any) => (
           game.isVisible &&
             <Box key={game.id}>
@@ -33,7 +33,7 @@ const GamesGrid = ({games}: any) => {
               />
             </Box>
         ))}
-      </ReactSortable>
+      {/* </ReactSortable> */}
     </Box>
   );
 }

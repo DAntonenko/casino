@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import { ReactSortable } from 'react-sortablejs';
+// import { ReactSortable } from 'react-sortablejs';
 import { connect } from 'react-redux';
 import Box from '@mui/material/Box';
 import GameCard from '../../components/GameCard';
@@ -15,7 +15,6 @@ interface IGamesGridProps {
 
 const GamesGrid: FC<IGamesGridProps> = ({
   games,
-  setGamesList,
 }) => {
 
   return (

@@ -5,7 +5,7 @@ export const initialState: IGamesStore = {
   games: [],
 };
 
-export default function games(state: IGamesStore = initialState, action: any): IGamesStore {
+export default function games(state: IGamesStore = initialState, action: { type: string, payload: IGamesStore} | { type: string, payload: any}): IGamesStore {
   switch (action.type) {
     case SET_GAMES: {
       return {

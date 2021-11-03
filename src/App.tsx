@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,10 +7,11 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import GamesGrid from './components/GamesGrid/GamesGrid';
 import GamesList from './components/GamesList';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getGames } from './store/actions/games';
 
 import './common_styles/App.css';
+
 
 interface ITabPanelProps {
   children?: React.ReactNode;
@@ -47,10 +48,9 @@ function a11yProps(index: number) {
 
 interface IAppProps {
   getGames: () => void;
-  games: [];
 }
 
-export const App: React.FunctionComponent<IAppProps> = ({getGames, games}) => {
+const App: FC<IAppProps> = () => {
 
   const [value, setValue] = React.useState(0);
 
@@ -58,10 +58,16 @@ export const App: React.FunctionComponent<IAppProps> = ({getGames, games}) => {
     setValue(newValue);
   };
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getGames();
-    // eslint-disable-next-line
-  }, []); // this way of preventing repeated calls is taken from the official React documentation
+    dispatch(getGames());
+  // eslint-disable-next-line
+  }, []);
+
+  const games = useSelector((store: any) => {
+    return store.games.games;
+  });
 
   return (
     <CssBaseline>
@@ -94,10 +100,4 @@ export const App: React.FunctionComponent<IAppProps> = ({getGames, games}) => {
   );
 }
 
-const mapStateToProps = function (state: any) {
-  return {
-    games: state.games.games,
-  }
-};
-
-export default connect(mapStateToProps, { getGames })(App);
+export default App;

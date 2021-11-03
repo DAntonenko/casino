@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, {FC} from 'react';
 import { ReactSortable } from 'react-sortablejs';
 import { connect } from 'react-redux';
 import Box from '@mui/material/Box';
 import GameCard from '../../components/GameCard';
+import { setGamesList } from '../../store/actions/games';
+import {IGame} from '../../models/game/i-game';
 
 import './GamesGrid.css';
 
-interface ItemType {
-  id: string;
-  name: string;
-  isVisible: boolean;
+interface IGamesGridProps {
+  games: IGame[];
+  setGamesList(newGames: IGame[]): void;
 }
 
-const GamesGrid = ({games}: any) => {
-  const [state, setState] = useState<ItemType[]>(games);
+const GamesGrid: FC<IGamesGridProps> = ({
+  games,
+  setGamesList,
+}) => {
 
   return (
     <Box
@@ -22,8 +25,8 @@ const GamesGrid = ({games}: any) => {
       sx={{ paddingBottom: '16px' }}
       className='grid-container'
     >
-      {/* <ReactSortable list={state} setList={setState} tag='div' style={{display: 'contents'}}> */}
-        {games.map((game: any) => (
+      {/* <ReactSortable list={games} setList={setGamesList} tag='div' style={{display: 'contents'}}> */}
+        {games.map((game: IGame) => (
           game.isVisible &&
             <Box key={game.id}>
               <GameCard
@@ -38,11 +41,4 @@ const GamesGrid = ({games}: any) => {
   );
 }
 
-const mapStateToProps = function (state: any) {
-  console.log('grid')
-  return {
-    games: state.games.games,
-  }
-};
-
-export default connect(mapStateToProps)(GamesGrid);
+export default connect(null, {setGamesList})(GamesGrid);

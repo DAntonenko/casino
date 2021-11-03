@@ -1,52 +1,48 @@
-import React, { useState, useReducer } from 'react';
+import React, { FC } from 'react';
 import { ReactSortable } from 'react-sortablejs';
 import ListItem from '@mui/material/ListItem';
 import Checkbox from '@mui/material/Checkbox';
 import { connect } from 'react-redux';
-import { setGameVisible, setGameInvisible } from '../store/actions/games';
+import { setGameVisible, setGameInvisible, setGamesList } from '../store/actions/games';
+import {IGame} from "../models/game/i-game";
 
 interface IGamesListProps {
-  games: [];
+  games: IGame[];
+  setGamesList(newGames: IGame[]): void;
   setGameVisible: (id: string) => void;
   setGameInvisible: (id: string) => void;
 }
 
-interface ItemType {
-  id: string;
-  name: string;
-  isVisible: boolean;
-}
-
-const GamesList: React.FunctionComponent<IGamesListProps> = ({games, setGameVisible, setGameInvisible}) => {
-  const [state, setState] = useState<ItemType[]>(games);
-
-  // eslint-disable-next-line
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0); // this way of force updating is taken from the official React documentation (but even it doesn't work!)
+const GamesList: FC<IGamesListProps> = ({
+  games,
+  setGamesList,
+  setGameVisible,
+  setGameInvisible,
+}) => {
 
   const onCheckboxChangeHandle = (id: string, isVisible: boolean) => {
     isVisible ? setGameInvisible(id) : setGameVisible(id);
-    forceUpdate(); // doesn't work :(((
   }
 
   return (
-    <ReactSortable list={state} setList={setState} tag='ul'>
-      {state.map((item) => (
+    <ReactSortable list={games} setList={setGamesList} tag='ul'>
+      {games.map((game: IGame) => (
         <ListItem
           sx={{ maxWidth: '300px' }}
-          key={item.id}
+          key={game.id}
           secondaryAction={
             <Checkbox
               edge="end"
-              onChange={() => onCheckboxChangeHandle(item.id, item.isVisible)}
-              checked={item.isVisible}
+              onChange={() => onCheckboxChangeHandle(game.id, game.isVisible)}
+              checked={game.isVisible}
             />
           }
         >
-          {item.name}
+          {game.name}
         </ListItem>
       ))}
     </ReactSortable>
   );
 };
 
-export default connect(null, { setGameVisible, setGameInvisible })(GamesList);
+export default connect(null, { setGameVisible, setGameInvisible, setGamesList })(GamesList);

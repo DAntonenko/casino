@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -16,6 +16,10 @@ interface IGameCardProps {
 }
 
 const GameCard: React.FunctionComponent<IGameCardProps> = ({id, name, info, setGameInvisible}) => {
+
+  const onRemove = useCallback(() => {
+    setGameInvisible(id);
+  }, [id, setGameInvisible]);
 
   return (
     <Card sx={{ minWidth: 280, maxWidth: 400 }}>
@@ -39,9 +43,7 @@ const GameCard: React.FunctionComponent<IGameCardProps> = ({id, name, info, setG
         <Button
           size='small'
           color='primary'
-          onClick={() => {
-            setGameInvisible(id);
-          }}
+          onClick={onRemove}
         >
           Remove
         </Button>

@@ -9,6 +9,7 @@ import GamesGrid from './components/GamesGrid/GamesGrid';
 import GamesList from './components/GamesList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGames } from './store/actions/games';
+import { IGamesGamesStore } from './models/store/i-games-store';
 
 import './common_styles/App.css';
 
@@ -65,7 +66,7 @@ const App: FC<IAppProps> = () => {
   // eslint-disable-next-line
   }, []);
 
-  const games = useSelector((store: any) => {
+  const games = useSelector((store: IGamesGamesStore) => {
     return store.games.games;
   });
 

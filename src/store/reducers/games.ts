@@ -1,9 +1,5 @@
-import { IGame } from '../../models/game/i-game';
+import { IGamesStore } from '../../models/store/i-games-store';
 import { SET_GAMES, SET_GAME_VISIBLE, SET_GAME_INVISIBLE } from '../actions/games';
-
-interface IGamesStore {
-  games: IGame[];
-}
 
 export const initialState: IGamesStore = {
   games: [],

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { connect } from 'react-redux';
 import { setGameInvisible } from '../store/actions/games';
+import { IGamesGamesStore } from '../models/store/i-games-store';
 import image from '../assets/table.jpg';
 
 interface IGameCardProps {
@@ -52,8 +53,7 @@ const GameCard: React.FunctionComponent<IGameCardProps> = ({id, name, info, setG
   );
 }
 
-const mapStateToProps = function (state: any) {
-  console.log('card')
+const mapStateToProps = function (state: IGamesGamesStore) {
   return {
     games: state.games.games,
   }

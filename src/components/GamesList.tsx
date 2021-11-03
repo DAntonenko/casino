@@ -5,9 +5,11 @@ import Checkbox from '@mui/material/Checkbox';
 import { connect } from 'react-redux';
 import { setGameVisible, setGameInvisible } from '../store/actions/games';
 
-// interface IGamesListProps {
-//   games: any;
-// }
+interface IGamesListProps {
+  games: [];
+  setGameVisible: (id: string) => void;
+  setGameInvisible: (id: string) => void;
+}
 
 interface ItemType {
   id: string;
@@ -15,7 +17,7 @@ interface ItemType {
   isVisible: boolean;
 }
 
-const GamesList = ({games, setGameVisible, setGameInvisible}: any) => {
+const GamesList: React.FunctionComponent<IGamesListProps> = ({games, setGameVisible, setGameInvisible}) => {
   const [state, setState] = useState<ItemType[]>(games);
 
   // eslint-disable-next-line

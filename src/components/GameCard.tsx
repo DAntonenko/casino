@@ -12,7 +12,7 @@ interface IGameCardProps {
   id: string;
   name: string;
   info?: string;
-  setGameInvisible: any;
+  setGameInvisible: (id: string) => void;
 }
 
 const GameCard: React.FunctionComponent<IGameCardProps> = ({id, name, info, setGameInvisible}) => {

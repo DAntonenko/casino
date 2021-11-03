@@ -45,7 +45,12 @@ function a11yProps(index: number) {
   };
 }
 
-export const App = ({getGames, games}: any) => {
+interface IAppProps {
+  getGames: () => void;
+  games: [];
+}
+
+export const App: React.FunctionComponent<IAppProps> = ({getGames, games}) => {
 
   const [value, setValue] = React.useState(0);
 
